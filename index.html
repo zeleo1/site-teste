@@ -1,21 +1,92 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0WQ46FR3H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C0WQ46FR3H');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O meu primeiro site</title>
+  <!-- Google tag (gtag.js) — confirma que o ID é igual ao do teu GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C0WQ46FR3H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-C0WQ46FR3H');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Remote Madeira | Fly over the island</title>
+
+  <!-- Site de TESTE: impede o Google de o indexar (não competir com remotemadeira.com) -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h2>Olá mundooo!</h2>
-  <img src="img/teste.jpg" alt="Descrição da imagem">
+
+  <!-- Fundo 3D (desenhado pelo WebGL) -->
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <!-- Barra de topo: logo, idioma, hora do dia, som -->
+  <header class="top">
+    <b>Remote Madeira</b>
+    <span class="lang" role="group" aria-label="Language">
+      <button data-l="en" class="on">EN</button>
+      <button data-l="pt">PT</button>
+      <button data-l="de">DE</button>
+    </span>
+    <span>
+      <small data-i="sun"></small>
+      <input type="range" id="sun" min="0" max="1" step=".01" value=".3" aria-label="Time of day">
+    </span>
+    <button class="snd" id="snd" aria-pressed="false" data-i="snd"></button>
+  </header>
+
+  <main>
+    <!-- Ecrã inicial -->
+    <section class="st" id="hero">
+      <div>
+        <h1>Madeira</h1>
+        <p class="sub" data-i="sub"></p>
+        <a class="btn" href="#cl" data-i="start"></a>
+      </div>
+    </section>
+
+    <!-- Atividades (geradas pelo script.js) -->
+    <div id="zs"></div>
+
+    <!-- Campo base: grupos e pedidos personalizados -->
+    <section class="st r" id="camp">
+      <div class="glass">
+        <h2 data-i="ct"></h2>
+        <p data-i="cp"></p>
+        <div class="ff">
+          <label><span data-i="cs"></span><input type="number" id="ts" min="2" max="40" value="8"></label>
+          <label><span data-i="cd"></span><input type="date" id="td"></label>
+          <a class="go" id="tw" href="#" target="_blank" rel="noopener" data-i="cb"></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- "Mochila": barra fixa em baixo com total e envio por WhatsApp -->
+  <div class="dock" id="dock">
+    <span><b id="dc">0</b> <span data-i="acts"></span></span>
+    <span class="s">
+      <button id="dm" aria-label="-">−</button>
+      <output id="dn">2</output>
+      <button id="dp" aria-label="+">+</button>
+      <small data-i="ppl"></small>
+    </span>
+    <span><b id="tot">€0</b><small id="sv"></small></span>
+    <a id="wa" class="go" href="#" target="_blank" rel="noopener" data-i="send"></a>
+  </div>
+
+  <!-- Scripts: primeiro o shader, depois a lógica -->
+  <script src="js/shader.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

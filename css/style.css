@@ -1,1 +1,221 @@
-body { background: lightblue; }
+/* =========================================
+   Remote Madeira — estilos
+   ========================================= */
+
+/* ---------- Base ---------- */
+:root {
+  box-sizing: border-box;
+  --ac: #d7ff3f;                       /* cor de destaque (verde-lima) */
+  padding-top: env(safe-area-inset-top, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font: 17px/1.55 "DM Sans", system-ui, sans-serif;
+  color: #fff;
+  background: linear-gradient(#1b4f7a, #e8a56a 70%, #0a2f3d);
+}
+h1, h2, b { font-family: Unbounded, "Arial Black", sans-serif; }
+
+/* ---------- Fundo 3D ---------- */
+#gl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ---------- Barra de topo ---------- */
+.top {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  flex-wrap: wrap;
+}
+.top > * {
+  background: rgba(6, 24, 32, .45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 14px;
+  color: #fff;
+}
+.top b { font-size: 14px; }
+.top button {
+  background: none;
+  border: 0;
+  color: #fff;
+  font: 600 14px "DM Sans", sans-serif;
+  padding: 4px 7px;
+  cursor: pointer;
+  opacity: .6;
+}
+.top .on,
+.top .snd[aria-pressed=true] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.top input { accent-color: var(--ac); width: 110px; vertical-align: middle; }
+
+/* ---------- Secções (ecrãs) ---------- */
+.st {
+  position: relative;
+  z-index: 5;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 90px 6vw 90px;
+}
+.st.r { justify-content: flex-end; }   /* cartão alinhado à direita */
+
+h1 {
+  font-weight: 900;
+  font-size: clamp(54px, 15vw, 200px);
+  line-height: .95;
+  text-shadow: 0 6px 60px rgba(0, 0, 0, .5);
+}
+.sub {
+  font-size: clamp(18px, 2.2vw, 26px);
+  max-width: 30ch;
+  margin: 16px 0 26px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, .6);
+}
+
+/* ---------- Cartões de vidro ---------- */
+.glass {
+  background: rgba(6, 24, 32, .5);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 26px;
+  padding: 26px;
+  max-width: 440px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .9s, transform .9s;
+}
+.glass.in { opacity: 1; transform: none; }   /* aparece ao fazer scroll */
+
+h2 {
+  font-weight: 900;
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.pr { font-size: 26px; }
+
+/* ---------- Botões ---------- */
+.btn, .go {
+  display: inline-block;
+  background: var(--ac);
+  color: #06202b;
+  border: 0;
+  border-radius: 99px;
+  padding: 14px 28px;
+  font: 600 16px "DM Sans", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+.add {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 99px;
+  padding: 9px 17px;
+  font: 600 15px "DM Sans", sans-serif;
+  cursor: pointer;
+}
+.add[aria-pressed=true] {
+  background: var(--ac);
+  border-color: var(--ac);
+  color: #06202b;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--ac);
+  outline-offset: 3px;
+}
+
+/* ---------- Formulário do campo base ---------- */
+.ff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+.ff label { display: flex; flex-direction: column; font-size: 14px; gap: 4px; }
+.ff input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 0;
+  font: 16px "DM Sans", sans-serif;
+  background: #fff;
+  color: #06202b;
+}
+.ff .go { grid-column: 1 / -1; text-align: center; }
+
+/* ---------- Mochila (barra fixa em baixo) ---------- */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 170%);     /* escondida por defeito */
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 16px;
+  background: #06202b;
+  padding: 10px 12px 10px 22px;
+  border-radius: 32px;
+  width: max-content;
+  max-width: 94vw;
+  transition: transform .4s;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+}
+.dock.show { transform: translate(-50%, 0); }
+.dock b { font-size: 15px; }
+.dock small { opacity: .75; margin-left: 4px; }
+.dock .s { display: flex; align-items: center; gap: 8px; }
+.dock .s button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .4);
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.dock .go { padding: 11px 20px; font-size: 15px; }
+
+/* ---------- Telemóvel ---------- */
+@media (max-width: 700px) {
+  .top input { width: 80px; }
+  .st.r { justify-content: flex-start; }
+}
+
+/* ---------- Acessibilidade: menos animação ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .glass, .dock { transition: none; }
+}
